@@ -45,6 +45,39 @@ class LinkedList:
         # if we've gotten here, then the target node isn't in our list
         return False
 
+
     def reverse_list(self, node, prev):
         # You must use recursion for this solution
-        pass
+
+        # base case 1: empty
+        if node is None:
+            return
+
+        # base case 2: the last flip
+        if node.next_node is None:
+            node.next_node = prev
+            self.head = node
+            return
+
+        else:
+            # save next node
+            nxt = node.next_node
+            node.next_node = prev
+            self.reverse_list(nxt, node)
+            
+    # We never use this in the tests, 
+    # was just trying to remind myself how reversing a SLL worked using iteration
+    def reverse_list_iterate(self):
+        prev = None
+        current = self.head
+        while current:
+            # saving current, and next nodes
+            nxt = current.next
+            # flipping
+            current.next = prev
+
+            # advance
+            prev = current
+            current = nxt
+
+            
